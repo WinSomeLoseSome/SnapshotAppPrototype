@@ -34,6 +34,10 @@
                                     <action selector="cameraButton_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8KK-m9-ndv"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3fB-hv-izJ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
@@ -44,12 +48,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="3fB-hv-izJ" id="uL6-t4-3Ba"/>
                         <segue destination="Xzx-qQ-LGR" kind="presentation" identifier="showPhoto_Segue" id="6OM-Vf-JZS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-468" y="53"/>
+            <point key="canvasLocation" x="-468" y="52.623688155922046"/>
         </scene>
         <!--Preview View Controller-->
         <scene sceneID="mzO-5J-PVA">

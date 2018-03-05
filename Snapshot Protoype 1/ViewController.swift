@@ -19,6 +19,9 @@ class ViewController: UIViewController {
     
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     
+
+    @IBOutlet weak var imageView: UIImageView!
+    
     var image: UIImage?
     
     override func viewDidLoad() {
@@ -29,6 +32,8 @@ class ViewController: UIViewController {
         setupInputOutput()
         setupPreviewLayer()
         startRunningCaptureSession()
+        //this adds the grid over lay
+        self.imageView.image = UIImage(named:"grid")
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -62,12 +67,17 @@ class ViewController: UIViewController {
         }
     }
     func setupPreviewLayer(){
+        //set up basic preview layer for viewing photo before taken
         cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         cameraPreviewLayer?.frame = self.view.frame
         self.view.layer.insertSublayer(cameraPreviewLayer!, at: 0)
         
+
+        
+    
     }
+    
     func startRunningCaptureSession(){
         captureSession.startRunning()
     }
