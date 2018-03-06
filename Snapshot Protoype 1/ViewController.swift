@@ -19,13 +19,21 @@ class ViewController: UIViewController {
     
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     
-
     @IBOutlet weak var imageView: UIImageView!
     
     var image: UIImage?
     
+    var overLayRotation = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let swipeLeft = UISwipeGestureRecognizer(target:self, action: #selector (handleSwipe(gesture:)))
+        swipeLeft.direction = .left
+        view.addGestureRecognizer(swipeLeft)
+        let swipeRight = UISwipeGestureRecognizer(target:self, action: #selector (handleSwipe(gesture:)))
+        swipeRight.direction = .right
+        view.addGestureRecognizer(swipeRight)
         
         setupCaptureSession()
         setupDevice()
@@ -33,8 +41,44 @@ class ViewController: UIViewController {
         setupPreviewLayer()
         startRunningCaptureSession()
         //this adds the grid over lay
-        self.imageView.image = UIImage(named:"grid")
+        addOverlay()
+        
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    @objc func handleSwipe (gesture: UISwipeGestureRecognizer){
+        
+        
+        if gesture.direction == .left {
+            
+            overLayRotation = overLayRotation + 1
+            print (overLayRotation)
+            switch abs(overLayRotation % 3) {
+            case 0:
+                self.imageView.image = UIImage(named:"grid")
+            case 1:
+                self.imageView.image = UIImage(named: "peron_outline")
+            case 2:
+                self.imageView.image = UIImage(named: "mountain_outline")
+            default:
+                self.imageView.image = UIImage(named:"grid")
+            }
+        } else if gesture.direction == .right {
+    
+            overLayRotation = overLayRotation - 1
+            print (overLayRotation)
+            switch abs(overLayRotation % 3) {
+            case 0:
+                self.imageView.image = UIImage(named:"grid")
+            case 1:
+                self.imageView.image = UIImage(named: "peron_outline")
+            case 2:
+                self.imageView.image = UIImage(named: "mountain_outline")
+            default:
+                self.imageView.image = UIImage(named:"grid")
+            }
+        }
+        
     }
     
     func setupCaptureSession(){
@@ -72,16 +116,18 @@ class ViewController: UIViewController {
         cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         cameraPreviewLayer?.frame = self.view.frame
         self.view.layer.insertSublayer(cameraPreviewLayer!, at: 0)
-        
-
-        
-    
     }
     
     func startRunningCaptureSession(){
         captureSession.startRunning()
     }
+    
+    func addOverlay(){
+        self.imageView.image = UIImage(named:"grid")
+    }
+    
 
+    
     @IBAction func cameraButton_TouchUpInside(_ sender: Any) {
         //performSegue(withIdentifier: "showPhoto_Segue", sender: nil)
         let settings = AVCapturePhotoSettings()
