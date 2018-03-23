@@ -136,7 +136,7 @@ class ViewController: UIViewController {
                 self.gridIcon.image = UIImage (named:"grid_icon")
                 overLay = .mountain
             default:
-                self.imageView.image = UIImage(named:"grid")
+                self.imageView.image = UIImage(named:"grid") 
                 self.gridIcon.image = UIImage (named:"grid_dark")
             }
         }
